@@ -10,5 +10,7 @@ routes.post('/task', TaskController.store);
 
 routes.get('/category', CategoryController.index);
 routes.post('/category', CategoryController.store);
+routes.delete('/category/:id', CategoryController.delete);
+routes.put('/category/:id', CategoryController.update);
 
 export default routes;
