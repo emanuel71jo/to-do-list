@@ -5,6 +5,7 @@ import CategoryController from './app/controllers/CategoryController';
 
 const routes = new Router();
 
+routes.get('/task', TaskController.index);
 routes.post('/task', TaskController.store);
 
 routes.get('/category', CategoryController.index);

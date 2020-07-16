@@ -4,6 +4,12 @@ import Task from '../models/Task';
 import Category from '../models/Category';
 
 class TaskController {
+  async index(req, res) {
+    const tasks = await Task.findAll();
+
+    return res.json(tasks);
+  }
+
   async store(req, res) {
     const schema = await Yup.object().shape({
       content: Yup.string().required(),
