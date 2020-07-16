@@ -7,6 +7,7 @@ const routes = new Router();
 
 routes.post('/task', TaskController.store);
 
+routes.get('/category', CategoryController.index);
 routes.post('/category', CategoryController.store);
 
 export default routes;
