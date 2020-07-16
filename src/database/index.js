@@ -2,7 +2,10 @@ import Sequelize from 'sequelize';
 
 import databaseConfig from '../config/database';
 
-const models = [];
+import Task from '../app/models/Task';
+import Category from '../app/models/Category';
+
+const models = [Task, Category];
 
 class Database {
   constructor() {
