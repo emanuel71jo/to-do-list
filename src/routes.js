@@ -7,6 +7,8 @@ const routes = new Router();
 
 routes.get('/task', TaskController.index);
 routes.post('/task', TaskController.store);
+routes.delete('/task/:id', TaskController.delete);
+routes.put('/task/:id', TaskController.update);
 
 routes.get('/category', CategoryController.index);
 routes.post('/category', CategoryController.store);
