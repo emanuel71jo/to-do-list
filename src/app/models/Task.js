@@ -5,6 +5,7 @@ class Task extends Model {
     super.init(
       {
         content: Sequelize.STRING,
+        completed: Sequelize.BOOLEAN,
       },
       { sequelize }
     );
