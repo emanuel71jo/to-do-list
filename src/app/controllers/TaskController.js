@@ -44,21 +44,15 @@ class TaskController {
   }
 
   async update(req, res) {
-    const schema = await Yup.object().shape({
-      content: Yup.string().required(),
-    });
+    const { id } = req.params;
 
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation failed' });
-    }
-
-    const task = await Task.findByPk(req.params.id);
+    const task = await Task.findOne({ where: { id } });
 
     if (!task) {
-      return res.status(404).json({ error: 'Task does not exist' });
+      return res.status(404).json({ error: 'Task not found' });
     }
 
-    await task.update({ content: req.body.content });
+    await task.update({ completed: !task.completed });
 
     return res.json(task);
   }
