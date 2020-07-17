@@ -17,7 +17,7 @@
 - [x] Remover atividades
 - [x] Listar categorias ordenadas (crescente e decrescente)
 - [x] Listar atividades ordenadas (crescente, decrescente e por data de criação)
-- [ ] Adicionar paginação na listagem de atividades
+- [x] Adicionar paginação na listagem de atividades
 - [ ] Criar os testes
 ---
 ## Rotas
@@ -28,8 +28,9 @@
 | POST | */category* | **name\*:** nome da categoria.| empty | Rota para cadastrar uma categoria |
 | DELETE | */category/:id* | empty | **id\*:** Identificador da categoria para ser excluída | Rota para apagar uma categoria |
 | PUT | */category/:id* | **name\*:** Novo nome da categoria | **id\*:** Identificador da categoria a ser atualizado | Rota para atualizar o nome de uma categoria |
-| GET | */task* | empty | empty | Listar todas as atividades em ordem de criação |
+| GET | */task* | empty | empty | Listar as 10 primeiras atividades em ordem de criação |
 | GET | */task?order=desc* | empty | **order:** Ordem da listagem, pode ser 'asc' ou 'desc' | Rota que lista as atividades filtrando por ordem crescente e decrescente |
+| GET | */task?page=2* | empty | **page:** Pagina da listagem, por default é 1 | Rota que lista as atividades com paginação de 10 em 10 atividades |
 | POST | */task* | **content\*:** Conteúdo, atividade a ser cadastrado. </br> **category_id\*:** Identificador da categoria para a qual essa atividade será cadastrada. | empty | Rota para cadastrar uma nova atividade |
 | DELETE | */task/:id* | empty | **id\*:** Identificador da atividade que será excluída | Rota para remover uma atividade |
 | PUT | */task/:id* | empty | **id\*:** Identificador da atividade | Rota que serve para marcar uma rota como concluída ou desmarcar como concluída |
