@@ -5,15 +5,20 @@ import Category from '../models/Category';
 
 class TaskController {
   async index(req, res) {
-    const { order } = req.query;
+    const { order, page = 1 } = req.query;
     let tasks;
 
     if (order) {
       tasks = await Task.findAll({
         order: [['content', order]],
+        offset: (page - 1) * 10,
+        limit: 10,
       });
     } else {
-      tasks = await Task.findAll();
+      tasks = await Task.findAll({
+        offset: (page - 1) * 10,
+        limit: 10,
+      });
     }
 
     return res.json(tasks);
