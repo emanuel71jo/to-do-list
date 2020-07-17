@@ -4,7 +4,16 @@ import Category from '../models/Category';
 
 class CategoryController {
   async index(req, res) {
-    const categories = await Category.findAll();
+    const { order } = req.query;
+    let categories;
+
+    if (order) {
+      categories = await Category.findAll({
+        order: [['name', order]],
+      });
+    } else {
+      categories = await Category.findAll();
+    }
 
     return res.json(categories);
   }
