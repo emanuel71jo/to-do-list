@@ -15,7 +15,7 @@
 - [x] Desmarcar atividade como concluída
 - [x] Remover categorias
 - [x] Remover atividades
-- [ ] Listar categorias ordenadas (crescente e decrescente)
+- [x] Listar categorias ordenadas (crescente e decrescente)
 - [ ] Listar atividades ordenadas (crescente, decrescente e por data de criação)
 - [ ] Adicionar paginação na listagem de atividades
 - [ ] Criar os testes
@@ -24,6 +24,7 @@
 | Method | Rota | Body | Params | Descrição |
 |-|-|-|-|-|
 | GET | */category* | empty | empty | Rota para listar todas as categorias |
+| GET | */category?order=asc* | empty | **order:** Order da listagem, pode ser 'asc' ou 'desc' | Rota para listar as categorias com um filtro |
 | POST | */category* | **name\*:** nome da categoria.| empty | Rota para cadastrar uma categoria |
 | DELETE | */category/:id* | empty | **id\*:** Identificador da categoria para ser excluída | Rota para apagar uma categoria |
 | PUT | */category/:id* | **name\*:** Novo nome da categoria | **id\*:** Identificador da categoria a ser atualizado | Rota para atualizar o nome de uma categoria |
