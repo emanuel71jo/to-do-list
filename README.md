@@ -11,8 +11,8 @@
 - [x] Listar as categorias
 - [x] Listar as atividades
 - [x] Atualizar dados de categorias
-- [ ] Marcar atividade como concluída
-- [ ] Desmarcar atividade como concluída
+- [x] Marcar atividade como concluída
+- [x] Desmarcar atividade como concluída
 - [x] Remover categorias
 - [x] Remover atividades
 - [ ] Listar categorias ordenadas (crescente e decrescente)
@@ -29,6 +29,7 @@
 | GET | */task* | empty | empty | Listar todas as atividades |
 | POST | */task* | **content\*:** Conteúdo, atividade a ser cadastrado. </br> **category_id\*:** Identificador da categoria para a qual essa atividade será cadastrada. | empty | Rota para cadastrar uma nova atividade |
 | DELETE | */task/:id* | empty | **id\*:** Identificador da atividade que será excluída | Rota para remover uma atividade |
+| PUT | */task/:id* | empty | **id\*:** Identificador da atividade | Rota que serve para marcar uma rota como concluída ou desmarcar como concluída |
 
 > \* Atributos e/ou parâmetros obrigatórios.
 ---
