@@ -18,13 +18,14 @@
 - [ ] Listar categorias ordenadas (crescente e decrescente)
 - [ ] Listar atividades ordenadas (crescente, decrescente e por data de criação)
 - [ ] Adicionar paginação na listagem de atividades
+- [ ] Criar os testes
 ---
 ## Rotas
 | Method | Rota | Body | Params | Descrição |
 |-|-|-|-|-|
 | GET | */category* | empty | empty | Rota para listar todas as categorias |
 | POST | */category* | **name\*:** nome da categoria.| empty | Rota para cadastrar uma categoria |
-| DELETE | */category/:id* | empty | **id\*:** Identificador da categoria para ser excluída | Rota para deletar uma categoria |
+| DELETE | */category/:id* | empty | **id\*:** Identificador da categoria para ser excluída | Rota para apagar uma categoria |
 | PUT | */category/:id* | **name\*:** Novo nome da categoria | **id\*:** Identificador da categoria a ser atualizado | Rota para atualizar o nome de uma categoria |
 | GET | */task* | empty | empty | Listar todas as atividades |
 | POST | */task* | **content\*:** Conteúdo, atividade a ser cadastrado. </br> **category_id\*:** Identificador da categoria para a qual essa atividade será cadastrada. | empty | Rota para cadastrar uma nova atividade |
