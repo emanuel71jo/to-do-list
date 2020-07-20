@@ -56,6 +56,7 @@ describe('Task', () => {
   });
 
   it('should list a registered', async () => {
+    await truncate();
     const category = await factory.create('Category');
 
     const { id } = await factory.create('Task', {

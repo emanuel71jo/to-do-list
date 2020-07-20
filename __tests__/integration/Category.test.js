@@ -54,4 +54,14 @@ describe('Category', () => {
 
     expect(response.status).toBe(400);
   });
+
+  it('should return a category created in order ascendente', async () => {
+    const firstCategory = await factory.create('Category');
+    const secondCategory = await factory.create('Category');
+
+    const response = await request(app).get('/category?order=asc');
+
+    expect(response.body[0].id).toBe(firstCategory.id);
+    expect(response.body[1].id).toBe(secondCategory.id);
+  });
 });
