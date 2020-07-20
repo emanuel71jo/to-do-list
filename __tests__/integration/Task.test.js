@@ -60,23 +60,114 @@ describe('Task', () => {
   it('should list two tasks registered, list in order it was created', async () => {
     const category = await factory.create('Category');
 
-    const { id: firstTask } = await factory.create('Task', {
+    const firstTask = await factory.create('Task', {
       category_id: category.dataValues.id,
     });
 
-    const { id: secondTask } = await factory.create('Task', {
+    const secondTask = await factory.create('Task', {
       category_id: category.dataValues.id,
     });
 
     const response = await request(app).get('/task');
 
-    const [idOne, idTwo] = response.body.map(task => task.id);
-
-    expect(idOne).toEqual(firstTask);
-    expect(idTwo).toEqual(secondTask);
+    expect(response.body[0].id).toBe(firstTask.id);
+    expect(response.body[1].id).toBe(secondTask.id);
   });
 
-  /**
-   * Listar em ordem crescente e decrescente
-   */
+  it('should list two tasks registered, list in order ascendente', async () => {
+    const category = await factory.create('Category');
+
+    const firstTask = await factory.create('Task', {
+      content: 'BBBBBB',
+      category_id: category.dataValues.id,
+    });
+
+    const secondTask = await factory.create('Task', {
+      content: 'AAAAAAA',
+      category_id: category.dataValues.id,
+    });
+
+    const response = await request(app).get('/task?order=asc');
+
+    expect(response.body[0].id).toBe(secondTask.id);
+    expect(response.body[1].id).toBe(firstTask.id);
+  });
+
+  it('should list two tasks registered, list in order descendente', async () => {
+    const category = await factory.create('Category');
+
+    const firstTask = await factory.create('Task', {
+      content: 'AAAAA',
+      category_id: category.dataValues.id,
+    });
+
+    const secondTask = await factory.create('Task', {
+      content: 'BBBBB',
+      category_id: category.dataValues.id,
+    });
+
+    const response = await request(app).get('/task?order=desc');
+
+    expect(response.body[0].id).toBe(secondTask.id);
+    expect(response.body[1].id).toBe(firstTask.id);
+  });
+
+  it('should list ten first tasks registers', async () => {
+    const category = await factory.create('Category');
+
+    await factory.create('Task', { category_id: category.dataValues.id });
+    await factory.create('Task', { category_id: category.dataValues.id });
+    await factory.create('Task', { category_id: category.dataValues.id });
+    await factory.create('Task', { category_id: category.dataValues.id });
+    await factory.create('Task', { category_id: category.dataValues.id });
+    await factory.create('Task', { category_id: category.dataValues.id });
+    await factory.create('Task', { category_id: category.dataValues.id });
+    await factory.create('Task', { category_id: category.dataValues.id });
+    await factory.create('Task', { category_id: category.dataValues.id });
+    await factory.create('Task', { category_id: category.dataValues.id });
+    const tasksPageTwo = await factory.create('Task', {
+      category_id: category.dataValues.id,
+    });
+    await factory.create('Task', { category_id: category.dataValues.id });
+    await factory.create('Task', { category_id: category.dataValues.id });
+    await factory.create('Task', { category_id: category.dataValues.id });
+
+    const response = await request(app).get('/task?page=2');
+
+    expect(response.body[0].id).toBe(tasksPageTwo.id);
+  });
+
+  it('should not return a task who was deleted', async () => {
+    const category = await factory.create('Category');
+
+    const firstTask = await factory.create('Task', {
+      category_id: category.dataValues.id,
+    });
+
+    const response = await request(app).delete(`/task/${firstTask.id}`);
+
+    const tasks = await request(app).get('/task');
+
+    expect(response.status).toBe(200);
+
+    expect(tasks.body.length).toBe(0);
+  });
+
+  it('should marked a task as completed', async () => {
+    const category = await factory.create('Category');
+
+    const firstTask = await factory.create('Task', {
+      category_id: category.dataValues.id,
+    });
+
+    let tasks = await request(app).get('/task');
+
+    expect(tasks.body[0].completed).toBe(false);
+
+    await request(app).put(`/task/${firstTask.id}`);
+
+    tasks = await request(app).get('/task');
+
+    expect(tasks.body[0].completed).toBe(true);
+  });
 });
