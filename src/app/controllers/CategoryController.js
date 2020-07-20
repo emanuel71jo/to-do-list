@@ -1,5 +1,3 @@
-import * as Yup from 'yup';
-
 import Category from '../models/Category';
 
 class CategoryController {
@@ -19,14 +17,6 @@ class CategoryController {
   }
 
   async store(req, res) {
-    const schema = await Yup.object().shape({
-      name: Yup.string().required(),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation failed' });
-    }
-
     const { name } = req.body;
 
     const { id } = await Category.create({ name });
@@ -43,14 +33,6 @@ class CategoryController {
   }
 
   async update(req, res) {
-    const schema = await Yup.object().shape({
-      name: Yup.string().required(),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation failed' });
-    }
-
     const category = await Category.findByPk(req.params.id);
 
     if (!category) {
