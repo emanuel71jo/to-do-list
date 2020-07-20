@@ -5,11 +5,12 @@ import CategoryController from './app/controllers/CategoryController';
 
 import validateCategoryStore from './app/validators/CategoryStore';
 import validateCategoryUpdate from './app/validators/CategoryUpdate';
+import validateTaskStore from './app/validators/TaskStore';
 
 const routes = new Router();
 
 routes.get('/task', TaskController.index);
-routes.post('/task', TaskController.store);
+routes.post('/task', validateTaskStore, TaskController.store);
 routes.delete('/task/:id', TaskController.delete);
 routes.put('/task/:id', TaskController.update);
 
