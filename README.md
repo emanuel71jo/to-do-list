@@ -18,7 +18,7 @@
 - [x] Listar categorias ordenadas (crescente e decrescente)
 - [x] Listar atividades ordenadas (crescente, decrescente e por data de criação)
 - [x] Adicionar paginação na listagem de atividades
-- [ ] Criar os testes
+- [x] Criar os testes
 ---
 ## Rotas
 | Method | Rota | Body | Params | Descrição |
