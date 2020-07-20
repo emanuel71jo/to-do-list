@@ -9,6 +9,18 @@ describe('Task', () => {
     await truncate();
   });
 
+  afterEach(async () => {
+    await truncate();
+  });
+
+  beforeAll(async () => {
+    await truncate();
+  });
+
+  afterAll(async () => {
+    await truncate();
+  });
+
   it('should return an error 400 of validation fails', async () => {
     const task = await factory.attrs('Task', { category_id: null });
 

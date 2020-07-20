@@ -13,6 +13,14 @@ describe('Category', () => {
     await truncate();
   });
 
+  beforeAll(async () => {
+    await truncate();
+  });
+
+  afterAll(async () => {
+    await truncate();
+  });
+
   it('should return nothing category', async () => {
     const response = await request(app).get('/category');
 
@@ -25,5 +33,25 @@ describe('Category', () => {
     const response = await request(app).get('/category');
 
     expect(response.body[0].id).toBe(category.id);
+  });
+
+  it('should return a category created', async () => {
+    const category = await factory.attrs('Category');
+
+    const response = await request(app)
+      .post('/category')
+      .send(category);
+
+    expect(response.status).toBe(200);
+  });
+
+  it('should return error 400, error Validation Fails', async () => {
+    const category = await factory.attrs('Category', { name: null });
+
+    const response = await request(app)
+      .post('/category')
+      .send(category);
+
+    expect(response.status).toBe(400);
   });
 });
